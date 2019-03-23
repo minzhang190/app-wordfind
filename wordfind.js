@@ -100,9 +100,9 @@
     * @param {[String]} words: The list of words to fit into the puzzle
     * @param {[Options]} options: The options to use when filling the puzzle
     */
-    var fillPuzzle = function (words, options) {
+    var fillPuzzle = function (words, options, wordsNotIncluded) {
 
-      var puzzle = [], i, j, len, missingWordsCount = 0;
+      var puzzle = [], i, j, len;
 
       // initialize the puzzle with blanks
       for (i = 0; i < options.height; i++) {
@@ -116,8 +116,8 @@
       shuffle(words);
       for (i = 0, len = words.length; i < len; i++) {
         if (!placeWordInPuzzle(puzzle, options, words[i])) {
-          if (options.allowedMissingWords && missingWordsCount <= options.allowedMissingWords) {
-            missingWordsCount++;
+          if (options.allowedMissingWords && wordsNotIncluded.length < options.allowedMissingWords) {
+            wordsNotIncluded.push(words[i]);
           } else {
             // if a word didn't fit in the puzzle, give up
             return null;
@@ -363,7 +363,8 @@
         while (!puzzle) {
           while (!puzzle && attempts++ < options.maxAttempts) {
             try {
-              puzzle = fillPuzzle(wordList, options);
+              var wordsNotIncluded = [];
+              puzzle = fillPuzzle(wordList, options, wordsNotIncluded);
               // fill in empty spaces with random letters
               if (options.fillBlanks) {
                 var lettersToAdd, fillingBlanksCount = 0, extraLetterGenerator;
@@ -383,7 +384,7 @@
                   throw new Error(`${fillingBlanksCount} extra letters were missing to fill the grid`);
                 }
                 var gridFillPercent = 100 * (1 - extraLettersCount / (options.width * options.height));
-                console.log(`Blanks filled with ${extraLettersCount} random letters - Final grid is filled at ${gridFillPercent.toFixed(0)}%`);
+                console.log(`Final grid filled at ${gridFillPercent.toFixed(0)}% - Blanks filled with ${extraLettersCount} letters`);
               }
             } catch (e) {
                 if (attempts > options.maxAttempts) {
@@ -403,6 +404,10 @@
             options.width++;
             attempts = 0;
           }
+        }
+
+        if (wordsNotIncluded) {
+            console.log('Words not included:', wordsNotIncluded.join(', '));
         }
 
         return puzzle;

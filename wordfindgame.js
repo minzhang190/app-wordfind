@@ -248,7 +248,7 @@
 
     // Class properties, game initial config:
     wordList = getWords().sort();
-    puzzle = wordfind.newPuzzleLax(wordList, options);
+    puzzle = wordfind.newPuzzle(wordList, options);
 
     // Draw all of the words
     drawPuzzle(puzzleEl, puzzle);

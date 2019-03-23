@@ -16,14 +16,20 @@
         </ul>
         <fieldset id="controls">
             <label for="allowed-missing-words">Allowed missing words :
-                <input id="allowed-missing-words" type="number" min="0" max="5" step="1" value="2">
+                <input id="allowed-missing-words" type="number" min="0" max="10" step="1" value="2">
             </label>
             <label for="max-grid-growth">Max grid growth :
                 <input id="max-grid-growth" type="number" min="0" max="5" step="1" value="0">
             </label>
+            <label for="max-attemps-per-grid-and-wordset">Max attemps per grid &amp; worset :
+                <input id="max-attemps-per-grid-and-wordset" type="number" min="1" max="500" step="1" value="100">
+            </label>
+            <label for="prefer-letter-overlaps">Prefer letter overlap :
+                <input id="prefer-letter-overlaps" type="checkbox" checked>
+            </label>
             <label for="extra-letters">Extra letters :
-                <select id="extra-letters">
-                    <option value="secret-word" selected>form a secret word</option>
+                <select id="extra-letters" selected>
+                    <option value="secret-word">form a secret word</option>
                     <option value="none">none, allow blanks</option>
                     <option value="secret-word-plus-blanks">form a secret word but allow for extra blanks</option>
                     <option value="random">random</option>
@@ -44,27 +50,27 @@
     <script>
     /* Example words setup */
     [
-        /*'adorable',
-        'comique',
-        'curieuse',
-        'drole',
-        'engagee',
-        'enjouee',
-        'fidele',
-        'futee',
-        'radieuse',
-        'sensible',
-        'sincere',*/
-        'complice',
-        'creative',
-        'elegante',
-        'farceuse',
-        'joviale',
-        'motivee',
-        'ordonnee',
-        'prudente',
-        'sexy',
-        'tendre',
+       /*'adorable',
+       'comique',
+       'curieuse',
+       'drole',
+       'engagee',
+       'enjouee',
+       'fidele',
+       'futee',
+       'radieuse',
+       'sensible',
+       'sincere',*/
+       'complice',
+       'creative',
+       'elegante',
+       'farceuse',
+       'joviale',
+       'motivee',
+       'ordonnee',
+       'prudente',
+       'sexy',
+       'tendre',
     ].map(word => WordFindGame.insertWordBefore($('#add-word').parent(), word));
     $('#secret-word').val('LAETITIA');
 
@@ -83,7 +89,8 @@
                 maxGridGrowth: +$('#max-grid-growth').val(),
                 fillBlanks: fillBlanks,
                 allowExtraBlanks: ['none', 'secret-word-plus-blanks'].includes($('#extra-letters').val()),
-                maxAttempts: 100,
+                maxAttempts: +$('#max-attemps-per-grid-and-wordset').val(),
+                preferOverlap: $('#prefer-letter-overlaps').val() == 'on'
             });
         } catch (error) {
             $('#result-message').text(`😞 ${error}, try to specify less ones`).css({color: 'red'});

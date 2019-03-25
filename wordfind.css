@@ -84,6 +84,12 @@ button::-moz-focus-inner {
 /**
 * Styles for the word list
 */
+#words-editor {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
 #words {
   max-width: 30rem;
   padding: 1em;

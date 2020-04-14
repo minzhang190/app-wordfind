@@ -108,15 +108,15 @@
       selectedSquares.push(this);
       curWord = $(this).text();
     };
-    
+
     var touchMove = function(e) {
       var xPos = e.originalEvent.touches[0].pageX;
       var yPos = e.originalEvent.touches[0].pageY;
       var targetElement = document.elementFromPoint(xPos, yPos);
       select(targetElement)
     };
-    
-    var mouseMove = function() { 
+
+    var mouseMove = function() {
       select(this);
     };
 
@@ -223,7 +223,7 @@
     var endTurn = function () {
       // see if we formed a valid word
       for (var i = 0, len = wordList.length; i < len; i++) {
-        
+
         if (wordList[i] === curWord) {
           $('.selected').addClass('found');
           wordList.splice(i,1);

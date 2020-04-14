@@ -110,6 +110,7 @@
     };
 
     var touchMove = function(e) {
+      e.preventDefault(); // Prevent pull-to-refresh
       var xPos = e.originalEvent.touches[0].pageX;
       var yPos = e.originalEvent.touches[0].pageY;
       var targetElement = document.elementFromPoint(xPos, yPos);

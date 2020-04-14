@@ -10,8 +10,12 @@ Object.keys(words).forEach(function(word) {
     createjs.Sound.registerSound(prefix + wordInfo.sound, word);
 });
 
-var game = new WordFindGame('#puzzle', options);
+try {
+    var game = new WordFindGame('#puzzle', options);
 
-wordfind.print(game);
+    wordfind.print(game);
 
-$('#solve').click(() => game.solve());
+    $('#solve').click(() => game.solve());
+} catch (error) {
+    location.reload();
+}

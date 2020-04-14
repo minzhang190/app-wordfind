@@ -11,33 +11,45 @@ function shuffleArray(array) {
 }
 
 var wordText = Object.keys(words);
-shuffleArray(wordText);
 
 var soundCount = 0;
 
-function handleLoad() {
-    if (++soundCount < wordText.length) {
-        return;
-    }
+function recreate() {
+    shuffleArray(wordText);
+
+    $('#puzzle').children().remove();
+    $('#words li').remove();
+
+    wordText.forEach(function(word) {
+        var wordInfo = words[word];
+        var $li = wordInfo['element'] = $('<li><img class="word"></li>');
+        $li.find('img').attr('src', prefix + wordInfo.image).data('info', wordInfo);
+        $('#words').append($li);
+    });
 
     try {
         var game = new WordFindGame('#puzzle', options);
 
         wordfind.print(game);
 
-        $('#solve').click(() => game.solve());
+        $('#solve').off('click').click(() => game.solve());
     } catch (error) {
         location.reload();
     }
+}
+
+function handleLoad() {
+    if (++soundCount < wordText.length) {
+        return;
+    }
+
+    recreate();
+    $('#create-grid').click(recreate);
 }
 
 createjs.Sound.addEventListener("fileload", handleLoad);
 
 wordText.forEach(function(word) {
     var wordInfo = words[word];
-    var $li = wordInfo['element'] = $('<li><img class="word"></li>');
-    $li.find('img').attr('src', prefix + wordInfo.image).data('info', wordInfo);
-    $('#words').append($li);
-
     createjs.Sound.registerSound(prefix + wordInfo.sound, word);
 });

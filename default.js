@@ -16,13 +16,13 @@ var words = {
 };
 
 // Letters used to fill blank spots in the puzzle
-var LETTERS = 'abcdefghijklmnoprstuvwy';
+var LETTERS = 'abcdefghijklmnopqrstuwxyz';
 
 var options = {
     // desired height of the puzzle, default: smallest possible
-    height: 10,
+    height: 1,
     // desired width of the puzzle, default: smallest possible
-    width: 10,
+    width: 1,
     // list of orientations to use, default: all orientations
     orientations: ['horizontal','horizontalBack','vertical','verticalUp', 'diagonal','diagonalUp','diagonalBack','diagonalUpBack'],
     // true to fill in the blanks, default: true
@@ -32,7 +32,7 @@ var options = {
     // number of tries before increasing puzzle size, default:3
     maxAttempts: 3,
     // number of puzzle grid increases, default:10
-    maxGridGrowth: 10,
+    maxGridGrowth: 30,
     // maximize word overlap or not, default: true
     preferOverlap: true,
     //

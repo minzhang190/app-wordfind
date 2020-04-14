@@ -44,7 +44,7 @@
     };
 
     var getWords = function () {
-      return $('input.word').toArray().map(wordEl => wordEl.value.toLowerCase()).filter(word => word);
+        return Object.keys(words);
     };
 
     /**
@@ -227,7 +227,8 @@
         if (wordList[i] === curWord) {
           $('.selected').addClass('found');
           wordList.splice(i,1);
-          $('input.word[value="' + curWord + '"]').addClass('wordFound');
+          words[curWord].element.find('img').addClass('wordFound');
+          createjs.Sound.play(curWord);
         }
 
         if (wordList.length === 0) {
@@ -244,7 +245,7 @@
     };
 
     /* Constructor START */
-    $('input.word').removeClass('wordFound');
+    $('img.word').removeClass('wordFound');
 
     // Class properties, game initial config:
     wordList = getWords().sort();
@@ -283,7 +284,7 @@
             y = solution[i].y,
             next = wordfind.orientations[orientation];
 
-        var wordEl = $('input.word[value="' + word + '"]');
+        var wordEl = words[word].element.find('img');
         if (!wordEl.hasClass('wordFound')) {
           for (var j = 0, size = word.length; j < size; j++) {
             var nextPos = next(x, y, j);

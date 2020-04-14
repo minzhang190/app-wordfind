@@ -35,9 +35,6 @@
   */
   var WordFind = function () {
 
-    // Letters used to fill blank spots in the puzzle
-    const LETTERS = 'abcdefghijklmnoprstuvwy';
-
     /**
     * Definitions for all the different orientations in which words can be
     * placed within a puzzle. New orientation definitions can be added and they

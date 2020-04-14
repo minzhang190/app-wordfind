@@ -15,6 +15,8 @@ var words = {
     },
 };
 
+var maxWordsPerGrid = 0;
+
 // Letters used to fill blank spots in the puzzle
 var LETTERS = 'abcdefghijklmnopqrstuwxyz';
 

@@ -44,7 +44,7 @@
     };
 
     var getWords = function () {
-        return Object.keys(words);
+        return wordText.slice();
     };
 
     /**

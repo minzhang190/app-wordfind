@@ -16,7 +16,11 @@ var wordText = Object.keys(words);
 var soundCount = 0;
 
 function recreate() {
+    wordText = Object.keys(words);
     shuffleArray(wordText);
+    if (maxWordsPerGrid > 0) {
+        wordText.splice(maxWordsPerGrid);
+    }
 
     $('#puzzle').children().remove();
     $('#words li').remove();
@@ -38,6 +42,7 @@ function recreate() {
 
         $('#solve').off('click').click(() => game.solve());
     } catch (error) {
+        console.log(error);
         location.reload();
     }
 }

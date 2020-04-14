@@ -1,4 +1,5 @@
 document.title = title;
+document.getElementById('h1').innerText = title;
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
 function shuffleArray(array) {

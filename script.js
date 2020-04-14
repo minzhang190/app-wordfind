@@ -24,7 +24,10 @@ function recreate() {
     wordText.forEach(function(word) {
         var wordInfo = words[word];
         var $li = wordInfo['element'] = $('<li><img class="word"></li>');
-        $li.find('img').attr('src', prefix + wordInfo.image).data('info', wordInfo);
+        $li.find('img')
+            .attr('src', prefix + wordInfo.image)
+            .attr('title', word.toUpperCase())
+            .data('info', wordInfo);
         $('#words').append($li);
     });
 

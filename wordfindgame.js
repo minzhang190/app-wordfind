@@ -230,10 +230,12 @@
           wordList.splice(i,1);
           words[curWord].element.find('img').addClass('wordFound');
           createjs.Sound.play(curWord);
+          gtag('event', 'wordfind-found', {event_category: 'app-wordfind', event_label: curWord});
         }
 
         if (wordList.length === 0) {
           $('.puzzleSquare').addClass('complete');
+          gtag('event', 'wordfind-complete', {event_category: 'app-wordfind'});
         }
       }
 
@@ -295,6 +297,8 @@
           wordEl.addClass('wordFound');
         }
       }
+
+      gtag('event', 'wordfind-solve', {event_category: 'app-wordfind'});
     };
   };
 

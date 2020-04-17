@@ -45,6 +45,8 @@ function recreate() {
         console.log(error);
         location.reload();
     }
+
+    gtag('event', 'wordfind-recreate', {event_category: 'app-wordfind'});
 }
 
 function handleLoad() {

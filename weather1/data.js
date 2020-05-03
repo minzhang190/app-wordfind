@@ -50,3 +50,5 @@ var words = {
         "sound": "assets/5e9cd3bcc9c8767483d77487.mp3"
     }
 };
+
+options.orientations = ['horizontal', 'vertical', 'diagonal', 'diagonalBack'];

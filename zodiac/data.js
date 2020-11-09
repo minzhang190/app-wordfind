@@ -50,3 +50,6 @@ var words = {
         "sound": "assets/5fa8f809972bcd05b41ead38.mp3"
     }
 };
+
+options.height = 8;
+options.width = 8;
